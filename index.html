@@ -1,23 +1,606 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
+
+    <!-- Schema Markup for enhanced search snippets -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "송파 이사 전문 서비스",
+      "serviceType": "송파구 포장이사",
+      "description": "송파구(잠실동, 문정동, 가락동 등) 전 지역을 대상으로 하는 전문 포장이사, 반포장이사, 일반이사 서비스입니다. 고객 맞춤형 솔루션을 제공하며 합리적인 비용으로 안전하고 신속한 이사를 보장합니다.",
+      "provider": {
+        "@type": "Organization",
+        "name": "송파이사 전문가",
+        "url": "https://yourdomain.com",
+        "logo": "https://yourdomain.com/logo.png"
+      },
+      "areaServed": {
+        "@type": "AdministrativeArea",
+        "name": "송파구",
+        "address": {
+          "@type": "PostalAddress",
+          "addressRegion": "서울특별시",
+          "addressLocality": "송파구"
+        }
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "송파 이사 서비스 가격표",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "송파 포장이사"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "price": "600000",
+              "priceCurrency": "KRW",
+              "description": "포장, 운반, 정리 정돈까지 모든 과정을 포함한 프리미엄 서비스"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "송파 반포장이사"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "price": "450000",
+              "priceCurrency": "KRW",
+              "description": "전문 인력이 큰 짐 포장 및 운반을 담당하고, 고객이 잔짐 정리를 맡는 합리적인 서비스"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "송파 일반이사"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "price": "350000",
+              "priceCurrency": "KRW",
+              "description": "고객이 직접 모든 짐을 포장하고, 운반만 전문가에게 맡기는 경제적인 서비스"
+            }
+          }
+        ]
+      }
+    }
+    </script>
+
+    <style>
+        /* Base Styling */
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+            background-color: #f7f9fc; /* Soft background color */
+            color: #333;
+        }
+        main {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: #007bff; /* Primary color */
+            color: white;
+            padding: 3rem 1.5rem;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 123, 255, 0.9), rgba(4, 91, 185, 0.8));
+            z-index: -1;
+        }
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: -1px;
+        }
+        header p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin-top: 1rem;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Section Styling */
+        section {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2.5rem;
+        }
+        h2 {
+            font-size: 2rem;
+            color: #007bff;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+        h3 {
+            font-size: 1.5rem;
+            color: #444;
+            margin-top: 2rem;
+            border-left: 5px solid #ff6f61; /* Accent color */
+            padding-left: 1rem;
+            font-weight: 500;
+        }
+        section p {
+            font-size: 1.05rem;
+            color: #555;
+        }
+
+        /* CTA Button Styling */
+        .cta-button {
+            display: inline-block;
+            background-color: #ff6f61; /* Accent color */
+            color: white;
+            font-weight: 700;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            margin: 2rem auto;
+            display: block;
+            width: fit-content;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(255, 111, 97, 0.4);
+        }
+        .cta-button:hover {
+            background-color: #e65c52;
+            transform: translateY(-3px);
+        }
+
+        /* Keyword Tags */
+        .keyword-tags {
+            margin: 2rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .keyword-tags a {
+            background-color: #e3f2fd;
+            color: #007bff;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            white-space: nowrap;
+        }
+        .keyword-tags a:hover {
+            background-color: #bbdefb;
+        }
+
+        /* Service Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        th, td {
+            padding: 1.2rem;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+            font-weight: 700;
+            text-align: center;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .price-highlight {
+            font-weight: 700;
+            color: #ff6f61;
+            font-size: 1.1rem;
+        }
+
+        /* Accordion Styling (FAQ) */
+        dl dt {
+            cursor: pointer;
+            padding: 1rem;
+            background-color: #f4f6f8;
+            border-bottom: 1px solid #e0e0e0;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: background-color 0.2s;
+            position: relative;
+            user-select: none;
+            margin-top: 5px;
+        }
+        dl dt:hover {
+            background-color: #e9ecef;
+        }
+        dl dt::after {
+            content: '+';
+            position: absolute;
+            right: 1rem;
+            font-size: 1.2rem;
+            color: #007bff;
+            transition: transform 0.3s;
+        }
+        dl dt.active::after {
+            content: '-';
+            transform: rotate(180deg);
+        }
+        dl dd {
+            padding: 1rem;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+            margin: 0;
+            display: none;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+        dl dd p {
+            margin-bottom: 1rem;
+        }
+        dl dd ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        dl dd li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+        }
+        dl dd li::before {
+            content: '•';
+            color: #ff6f61;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        /* Local Challenge Section (Grid for better readability) */
+        .local-challenge-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .challenge-item {
+            background-color: #fcfcfc;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        }
+        .challenge-item h4 {
+            font-size: 1.2rem;
+            color: #007bff;
+            margin-top: 0;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Form Styling */
+        .quote-form {
+            background-color: #f9f9f9;
+            padding: 2.5rem;
+            border-radius: 10px;
+        }
+        .quote-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #444;
+        }
+        .quote-form input[type="text"],
+        .quote-form input[type="tel"],
+        .quote-form input[type="date"],
+        .quote-form textarea,
+        .quote-form select {
+            width: calc(100% - 24px);
+            padding: 12px;
+            margin-bottom: 1.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .form-row {
+            display: flex;
+            gap: 1.5rem;
+        }
+        .form-row > div {
+            flex: 1;
+        }
+        .quote-form button {
+            background-color: #007bff;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .quote-form button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Footer Styling */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+            color: #888;
+            background-color: #e9ecef;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>송파이사, 믿을 수 있는 전문가에게 맡기세요</h1>
+        <p>송파구 맞춤형 포장이사/반포장이사 서비스, 2026년 이사 트렌드에 맞춰 준비합니다.</p>
+        <nav>
+            <ul>
+                <li><a href="#service">서비스 종류</a></li>
+                <li><a href="#price">이사 비용 안내</a></li>
+                <li><a href="#area_info">송파구 지역 정보</a></li>
+                <li><a href="#faq">자주 묻는 질문</a></li>
+                <li><a href="#contact">견적 문의</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <main>
-      <h1>Home page</h1>
+
+        <section id="service">
+            <h2>송파 이사 서비스: 고객 맞춤형 솔루션</h2>
+            <p><strong>송파구</strong>는 서울 동남부의 핵심 지역으로, 잠실 대단지 아파트부터 문정동, 가락동의 신축 주상복합, 거여동과 마천동의 재개발 지역까지 다양한 주거 형태가 공존합니다. 이러한 송파구의 특성을 정확히 이해하는 전문 이사 서비스가 필요합니다.</p>
+            <p>저희는 단순히 짐을 운반하는 것을 넘어, 고객님의 이사 환경과 예산에 최적화된 맞춤형 이사 솔루션을 제공합니다. 송파구의 복잡한 이사 환경(예: 엘리베이터 협소, 주차 문제)을 고려한 전문 인력과 장비로 신속하고 안전한 이사를 약속드립니다.</p>
+
+            <h3>1. 송파 포장이사: All-in-One 프리미엄 서비스</h3>
+            <p>포장이사는 이사의 모든 과정을 전문가에게 맡기는 서비스입니다. 짐 포장부터 운반, 배치, 그리고 정리 정돈까지 전부 처리해 드립니다. 바쁜 일정으로 이사에 신경 쓸 여유가 없거나, 깔끔하고 완벽한 이사를 원하는 고객님께 가장 적합한 서비스입니다.</p>
+
+            <h3>2. 송파 반포장이사: 합리적인 경제적 선택</h3>
+            <p>반포장이사는 포장의 일부를 고객님께서 직접 처리하는 합리적인 서비스입니다. 이사 당일 큰 짐(가구, 가전)은 저희가 포장 및 운반하고, 잔짐(옷가지, 주방용품 등)은 고객님께서 미리 포장합니다. 정리 정돈 또한 고객님께서 맡아 비용을 절약할 수 있습니다.</p>
+
+            <h3>3. 송파 일반이사 (용달이사): 최소 비용으로 최대 효과</h3>
+            <p>일반이사는 고객님이 모든 짐을 직접 포장하고, 저희는 운반과 큰 짐 배치만 담당합니다. 짐이 적거나(원룸, 1.5룸) 이사 경험이 많아 직접 포장 및 정리가 가능한 고객님께 추천하는 경제적인 옵션입니다. '송파 용달이사'를 검색하시는 고객님들께 적합한 서비스입니다.</p>
+
+            <div class="keyword-tags">
+                <a href="#contact">송파 포장이사 견적</a>
+                <a href="#price">송파 반포장이사 비용</a>
+                <a href="#service">잠실 이사</a>
+                <a href="#area_info">문정동 이사 전문가</a>
+                <a href="#faq">송파구 이사 준비</a>
+            </div>
+        </section>
+
+        <section id="price">
+            <h2>송파 이사 비용: 2026년 기준 투명한 가격 산정</h2>
+            <p>이사 비용은 '이사 형태', '짐의 양', '운반 거리', '이사 날짜', '작업 환경' 등 여러 요소에 따라 크게 달라집니다. 특히 <strong>송파구</strong>의 경우, 대단지 아파트의 관리비나 엘리베이터 사용료, 주차 공간 확보 여부 등이 비용에 영향을 미칩니다. 2026년에도 이사 비용은 꾸준히 상승하는 추세이며, 특히 주말이나 '손 없는 날'에는 추가 요금이 발생할 수 있습니다.</p>
+
+            <h3>주요 이사 서비스별 대략적인 비용 비교 (2026년 예상 기준)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>서비스 종류</th>
+                        <th>설명 및 특징</th>
+                        <th>대략적인 비용 (VAT 별도)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>포장이사</strong></td>
+                        <td>전 과정 전문가 책임. 짐이 많거나 편리함을 추구하는 고객에게 적합.</td>
+                        <td><span class="price-highlight">60만원 ~ 150만원</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>반포장이사</strong></td>
+                        <td>포장/정리를 분담하여 비용 절감. 짐이 많지 않은 1~2인 가구에 적합.</td>
+                        <td><span class="price-highlight">45만원 ~ 90만원</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>일반이사</strong></td>
+                        <td>운반만 대행. 모든 짐 포장/정리는 고객 직접 수행.</td>
+                        <td><span class="price-highlight">35만원 ~ 60만원</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>※ 상기 가격은 1톤~2.5톤 차량 기준이며, 짐의 양이나 작업 난이도에 따라 변동될 수 있습니다. 정확한 견적은 방문 상담을 통해 확인하시기 바랍니다.</p>
+
+            <a href="#contact" class="cta-button">무료 방문 견적 신청하기 ➡️</a>
+        </section>
+
+        <section id="area_info">
+            <h2>송파구 지역별 이사 특성 분석 (2026년 기준)</h2>
+            <p><strong>송파이사</strong>는 다른 지역과 달리 대단지 아파트가 밀집해 있어 이사 전후로 반드시 확인해야 할 사항들이 많습니다. 저희는 송파구의 다양한 지역 특성을 고려한 맞춤형 이사 계획을 수립합니다.</p>
+
+            <h3>송파구 주요 지역별 이사 난이도 및 고려 사항</h3>
+            <div class="local-challenge-grid">
+                <div class="challenge-item">
+                    <h4>잠실동 (엘스, 리센츠, 트리지움, 파크리오 등)</h4>
+                    <p>대규모 아파트 단지 밀집 지역입니다. 이사 당일 엘리베이터 사용 예약이 필수적이며, 관리사무소에 미리 통보해야 합니다. 주차 공간 확보나 이사차량 진입 제한 규정을 사전에 확인해야 합니다. <strong>잠실 포장이사</strong>를 찾는 고객님들이 가장 많습니다.</p>
+                </div>
+                <div class="challenge-item">
+                    <h4>문정동 (송파 파크하비오, 문정법조타운)</h4>
+                    <p>최근 신축 아파트와 오피스텔이 많은 지역입니다. 고층 건물이 많아 사다리차 이용이 필수적이거나, 주차 공간이 협소할 수 있습니다. <strong>문정동 이사</strong> 시 짐 양에 따른 정확한 차량 선택이 중요합니다.</p>
+                </div>
+                <div class="challenge-item">
+                    <h4>가락동, 방이동, 오금동</h4>
+                    <p>재건축이 활발한 지역과 구형 주택이 혼재되어 있습니다. 골목길이 좁거나 주차 공간이 부족한 경우가 많아 운반 난이도가 높을 수 있습니다. <strong>방이동 이사</strong>는 특히 짐 운반 시 세밀한 계획이 필요합니다.</p>
+                </div>
+                <div class="challenge-item">
+                    <h4>위례신도시 (송파구 포함 지역)</h4>
+                    <p>신축 단지가 많아 이사 규정이 까다로운 곳이 많습니다. 이사 날짜가 몰리는 경우 엘리베이터 예약이 치열하므로, 최소 2주 전부터 확인해야 합니다. <strong>위례신도시 이사</strong>는 입주 지정 기간을 고려한 서비스가 필요합니다.</p>
+                </div>
+                <div class="challenge-item">
+                    <h4>거여동, 마천동</h4>
+                    <p>재개발 및 재건축이 진행되는 지역입니다. 좁은 골목길과 언덕이 많아 짐 운반이 까다롭습니다. <strong>거여동 이사</strong>는 특히 사다리차 사용이 어려운 환경일 수 있어, 경험 많은 전문가의 현장 방문 견적이 중요합니다.</p>
+                </div>
+                <div class="challenge-item">
+                    <h4>석촌동, 송파동</h4>
+                    <p>빌라 및 다세대 주택이 밀집한 지역입니다. 주차 공간 확보 및 이사차량 진입에 어려움을 겪는 경우가 많습니다. <strong>송파동 이사</strong>는 특히 짐의 양에 비해 차량 진입이 어려운 경우가 많으므로 전문가의 조언이 필요합니다.</p>
+                </div>
+            </div>
+
+            <p><strong>송파구 이사</strong>는 단순한 운반을 넘어, 지역 특성에 대한 이해가 핵심입니다. 저희는 송파역, 잠실역, 몽촌토성역 인근의 교통 상황을 포함하여 모든 변수를 철저히 분석하여 이사를 진행합니다.</p>
+        </section>
+
+        <section id="faq">
+            <h2>자주 묻는 질문 (FAQ)</h2>
+            <p><strong>네이버 지식iN</strong>에서 <strong>'송파이사'</strong>를 검색하신 많은 분들이 궁금해하시는 질문들을 정리했습니다. 이사 준비 전 꼭 확인하세요.</p>
+            <dl>
+                <dt tabindex="0" aria-expanded="false">Q1. 송파구 이사 시 엘리베이터 사용료는 얼마인가요?</dt>
+                <dd>A1. 송파구 대형 아파트 단지(예: 헬리오시티, 파크리오)의 경우, 엘리베이터 사용료가 규정되어 있습니다. 단지별로 5만원에서 20만원까지 차이가 나며, 관리사무소에 이사 예정일을 통보하고 미리 납부해야 합니다. 저희가 견적 시 이 부분을 안내해 드립니다.</dd>
+
+                <dt tabindex="0" aria-expanded="false">Q2. 2026년 송파구 이사 성수기는 언제인가요?</dt>
+                <dd>A2. 이사 성수기는 일반적으로 2~3월과 9~10월이며, 특히 2026년에도 '손 없는 날'과 주말은 이사 수요가 집중될 것으로 예상됩니다. 이 기간에는 이사 비용이 상승하고 예약이 어렵습니다. 최소 1~2개월 전에 미리 예약하는 것이 좋습니다.</dd>
+
+                <dt tabindex="0" aria-expanded="false">Q3. 이사 중 짐 파손 시 보상 처리는 어떻게 되나요?</dt>
+                <dd>A3. 저희 업체는 국토교통부의 허가를 받은 정식 이사업체로, 화물자동차 운수사업법에 따른 적재물 배상책임보험에 가입되어 있습니다. 이사 중 발생하는 물품 파손이나 분실에 대해 규정에 따라 신속하고 투명하게 보상해 드립니다. 반드시 계약 시 보험 내용을 확인하시기 바랍니다.</dd>
+
+                <dt tabindex="0" aria-expanded="false">Q4. 이사 견적 시 방문 견적이 필수인가요?</dt>
+                <dd>A4. 정확한 이사 견적을 위해서는 방문 견적이 필수적입니다. 특히 <strong>송파구</strong>의 경우 짐의 양뿐만 아니라 사다리차 사용 가능 여부, 주차 환경, 엘리베이터 규정 등 현장 상황에 따라 비용이 달라지기 때문입니다. 전화나 온라인 견적은 대략적인 비용이며, 정확한 견적은 현장 확인 후 확정됩니다.</dd>
+
+                <dt tabindex="0" aria-expanded="false">Q5. 송파구 이사 업체 선택 시 주의사항은 무엇인가요?</dt>
+                <dd>A5. 1) 정식 허가 업체인지 확인 (사업자등록증, 관허업체 여부), 2) 계약서 작성 시 보험 가입 여부 명시, 3) 추가 비용 발생 가능성 항목 확인 (사다리차, 폐기물 처리 등), 4) 후기 및 평점 등을 종합적으로 검토해야 합니다.</dd>
+            </dl>
+        </section>
+
+        <section id="contact">
+            <h2>송파이사 견적 및 예약 문의 (2026년 이사 준비)</h2>
+            <p><strong>송파구 이사</strong>는 사소한 변수 하나가 전체 비용과 만족도를 좌우합니다. 2026년 이사를 계획하고 계신다면, 지금 바로 송파 이사 전문가와 상담하세요.</p>
+
+            <div class="quote-form">
+                <h3>이사 무료 견적 요청 양식</h3>
+                <form action="#" method="post"> <!-- action link should point to actual form processing script -->
+                    <div class="form-row">
+                        <div>
+                            <label for="name">이름:</label>
+                            <input type="text" id="name" name="name" placeholder="고객님의 성함을 입력해주세요" required>
+                        </div>
+                        <div>
+                            <label for="phone">연락처:</label>
+                            <input type="tel" id="phone" name="phone" placeholder="010-0000-0000" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="movingDate">이사 희망 날짜:</label>
+                        <input type="date" id="movingDate" name="movingDate" required>
+                    </div>
+                    <div>
+                        <label for="addressFrom">출발지 (송파구 상세 주소):</label>
+                        <input type="text" id="addressFrom" name="addressFrom" placeholder="예: 송파구 잠실동 00아파트 00동 00호" required>
+                    </div>
+                    <div>
+                        <label for="addressTo">도착지 (상세 주소):</label>
+                        <input type="text" id="addressTo" name="addressTo" placeholder="예: 강동구 둔촌동 00빌라 00호" required>
+                    </div>
+                    <div>
+                        <label for="serviceType">이사 종류 선택:</label>
+                        <select id="serviceType" name="serviceType" required>
+                            <option value="">이사 종류를 선택하세요</option>
+                            <option value="포장이사">포장이사</option>
+                            <option value="반포장이사">반포장이사</option>
+                            <option value="일반이사">일반이사</option>
+                            <option value="용달이사">용달이사</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="memo">추가 요청사항 (엘리베이터 유무, 짐 특이사항 등):</label>
+                        <textarea id="memo" name="memo" rows="4" placeholder="특이사항을 상세히 기재해 주시면 정확한 견적에 도움이 됩니다."></textarea>
+                    </div>
+                    <button type="submit">무료 견적 신청 완료</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="external-links">
+            <h2>공신력 있는 외부 자료 및 정보</h2>
+            <p>신뢰성 있는 외부 기관의 자료를 통해 이사 관련 정보를 확인하고, 안전한 이사를 준비하세요.</p>
+            <ul>
+                <li><a href="https://www.ftc.go.kr/www/cpw/service/selectBusi.do?key=670&busiType=08" target="_blank">공정거래위원회 이사화물 표준약관 확인 (소비자보호)</a></li>
+                <li><a href="https://www.molit.go.kr/" target="_blank">국토교통부 (이사 관련 법규 및 정책 정보)</a></li>
+                <li><a href="https://namu.wiki/w/%ED%8F%AC%EC%9E%A5%EC%9D%B4%EC%82%AC" target="_blank">포장이사에 대한 나무위키 정보</a></li>
+                <li><a href="https://www.kca.go.kr/index.do" target="_blank">한국소비자원 (이사화물 피해구제 정보)</a></li>
+                <li><a href="https://www.songpa.go.kr/" target="_blank">송파구청 공식 웹사이트 (지역 정보 확인)</a></li>
+            </ul>
+        </section>
     </main>
-  </body>
-</html>
+
+    <footer>
+        <p>Copyright &copy; 2025. 송파이사 전문가. All rights reserved. | 대표: 홍길동 | 사업자등록번호: 123-45-67890 | 주소: 서울특별시 송파구 송파대로 123</p>
+    </footer>
+
+    <!-- JavaScript for FAQ accordion functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dtElements = document.querySelectorAll('dl dt');
+
+            dtElements.forEach(dt => {
+                dt.addEventListener('click', () => {
+                    // Toggle visibility of the next sibling element (dd)
+                    const ddElement = dt.nextElementSibling;
+                    if (ddElement) {
+                        const isExpanded = dt.classList.contains('active');
+                        
+                        // Collapse all other dd elements
+                        dtElements.forEach(item => {
+                            item.classList.remove('active');
+                            item.setAttribute('aria-expanded', 'false');
+                            item.nextElementSibling.style.display = 'none';
+                        });
+
+                        // Expand current dd element if it was collapsed
+                        if (!isExpanded) {
+                            dt.classList.add('active');
+                            dt.setAttribute('aria-expanded', 'true');
+                            ddElement.style.display = 'block';
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+
+  
